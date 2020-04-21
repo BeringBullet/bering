@@ -3,7 +3,7 @@ sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-pr
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 curl -sL get.docker.com | sed 's/9)/10)/' | sudo sh
 sudo useradd -p admin administrator
-#sudo passwd administrator
+sudo passwd administrator
 sudo usermod -aG sudo administrator
 sudo usermod -aG docker administrator
 sudo systemctl enable docker
