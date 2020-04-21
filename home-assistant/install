@@ -1,0 +1,1 @@
+sudo docker run --init -d --name="home-assistant" -e "TZ=America/Chicago" -v ~/bering/home-assistant/config:/config --net=host homeassistant/raspberrypi3-homeassistant:stable

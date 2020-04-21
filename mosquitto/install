@@ -1,0 +1,6 @@
+Create /docker/mosquitto/mosquitto.conf
+persistence false
+persistence_location /mosquitto/data/
+log_dest file /mosquitto/log/mosquitto.log
+
+docker run -it -p 1883:1883 -p 9001:9001 -v /docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf eclipse-mosquitto
