@@ -3,12 +3,6 @@ import threading
 import time
 import relay
 from datetime import datetime
-from homie.device_dimmer import Device_Dimmer
-
-mqtt_settings = {
-    'MQTT_BROKER': '192.168.86.30',
-    'MQTT_PORT': 1883,
-}
 
 broker_address = "192.168.86.30"
 clientName = "mainbase"

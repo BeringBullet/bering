@@ -1,7 +1,8 @@
 FROM python:3-alpine
 
+RUN apk update
+RUN python3 -m pip install --upgrade pip setuptools wheel
+
 ADD ./app/ /
-
 RUN pip install -r requirements.txt
-
 CMD [ "python", "./app.py" ]

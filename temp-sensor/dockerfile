@@ -1,0 +1,12 @@
+FROM python:3-alpine
+
+RUN apk update
+RUN python3 -m pip install --upgrade pip setuptools wheel
+run apk add musl-dev
+RUN apk add gcc
+
+RUN pip install -r requirements.txt
+
+ADD ./app/ /
+
+CMD [ "python", "./app.py" ]
