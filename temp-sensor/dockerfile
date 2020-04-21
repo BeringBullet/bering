@@ -5,8 +5,7 @@ RUN python3 -m pip install --upgrade pip setuptools wheel
 run apk add musl-dev
 RUN apk add gcc
 
-RUN pip install -r requirements.txt
-
 ADD ./app/ /
 
+RUN pip install -r requirements.txt
 CMD [ "python", "./app.py" ]
