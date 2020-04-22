@@ -2,8 +2,10 @@ sudo apt-get update
 sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 curl -sL get.docker.com | sed 's/9)/10)/' | sudo sh
+
 sudo useradd administrator
 sudo passwd administrator
+
 sudo usermod -aG sudo administrator
 sudo usermod -aG docker administrator
 sudo systemctl enable docker
@@ -19,10 +21,13 @@ sudo docker run -d --name=chronograf -p 8888:8888 chronograf --influxdb-url=http
 cd ~/bering/bering-IOT/mqtt-influxdb
 sudo docker build -t bering/mqqt-influxdb:latest .
 sudo docker run -d --name=mqqt-influxdb bering/mqqt-influxdb:latest
-cd ~/bering/bering-IOT/temp-sensor
-sudo docker build -t bering/temp-sensor:latest .
-sudo docker run -d --name=temp-sensor --privileged bering/temp-sensor:latest
 cd ~/bering/bering-IOT/webserver
 sudo docker build -t bering/webserver:latest .
 sudo docker run -d --name=webserver bering/webserver:latest
+
+
+cd ~/bering/bering-IOT/temp-sensor
+sudo docker build -t bering/temp-sensor:latest .
+sudo docker run -d --name=temp-sensor --privileged bering/temp-sensor:latest
+
 
