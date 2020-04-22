@@ -1,33 +1,25 @@
 import Adafruit_DHT
-import paho.mqtt.client as mqtt
 import time
-from datetime import datetime
+from homie.device_temperature_humidity import Device_Temperature_Humidity
 
-BROCKER_ADDRESS = "192.168.86.30"
-MQTT_TOPIC_HUMIDITY = "home/GS1/humidity"
-MQTT_TOPIC_TEMPERATURE = "home/GS1/temperature"
-MQTT_TOPIC_STATE = "home/GS1/status"
+mqtt_settings = {
+    "MQTT_BROKER": "192.168.86.30",
+    "MQTT_PORT": 1883,
+}
+
+deviceID = "gs1"
 MQTT_PUBLISH_DELAY = 60
-MQTT_CLIENT_ID = "dht22"
-
 DHT_SENSOR = Adafruit_DHT.DHT22
 DHT_PIN = 4
 
-print("creating new instance")
-client = mqtt.Client(MQTT_CLIENT_ID)  # create new instance
-print("connecting to broker")
-client.connect(BROCKER_ADDRESS)  # connect to broker
-
-
-def sendMessage(topic, payload):
-    client.publish(topic, payload)
-
+temp_hum = Device_Temperature_Humidity(device_id=deviceID, name="Temp Hum", mqtt_settings=mqtt_settings)
 
 def get_sensor_data():
-    humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-    sendMessage(MQTT_TOPIC_TEMPERATURE, temperature)
-    sendMessage(MQTT_TOPIC_HUMIDITY, humidity)
-    print(temperature)
+    humidity, temperatureC = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+    temperatureF = (temperatureC * 9.0 / 5.0) + 32.0
+
+    temp_hum.update_temperature(temperatureF)
+    temp_hum.update_humidity(humidity)
 
 
 def main_thread():

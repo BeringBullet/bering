@@ -1,9 +1,9 @@
 FROM python:3-alpine
 
 RUN apk update
+RUN apk --no-cache add libffi-dev musl-dev gcc
+
 RUN python3 -m pip install --upgrade pip setuptools wheel
-run apk add musl-dev
-RUN apk add gcc
 
 ADD ./app/ /
 RUN pip install -r requirements.txt
