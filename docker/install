@@ -2,8 +2,10 @@ sudo apt-get update
 sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common -y
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 curl -sL get.docker.com | sed 's/9)/10)/' | sudo sh
+
 sudo useradd administrator
 sudo passwd administrator
+
 sudo usermod -aG sudo administrator
 sudo usermod -aG docker administrator
 sudo systemctl enable docker
@@ -12,17 +14,20 @@ sudo docker volume create portainer_data
 sudo docker run -it -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 sudo docker pull influxdb
 sudo docker run -it -d -p 8086:8086 --name=influxdb --restart=unless-stopped influxdb 
-sudo docker run -it -d -p 1883:1883 -p 9001:9001 -v ~/bering/bering-IOT/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf eclipse-mosquitto
+sudo docker run -it -d -p 1883:1883 --name=MQTT-Brocker -p 9001:9001 -v ~/bering/bering-IOT/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf eclipse-mosquitto
 sudo docker run --init -d --name="home-assistant" -e "TZ=America/Chicago" -v ~/bering/home-assistant/config:/config --net=host homeassistant/raspberrypi3-homeassistant:stable
 sudo docker run -d --name=chronograf -p 8888:8888 chronograf --influxdb-url=http://192.168.86.30:8086
 
 cd ~/bering/bering-IOT/mqtt-influxdb
 sudo docker build -t bering/mqqt-influxdb:latest .
 sudo docker run -d --name=mqqt-influxdb bering/mqqt-influxdb:latest
-cd ~/bering/bering-IOT/temp-sensor
-sudo docker build -t bering/temp-sensor:latest .
-sudo docker run -d --name=temp-sensor --privileged bering/temp-sensor:latest
 cd ~/bering/bering-IOT/webserver
 sudo docker build -t bering/webserver:latest .
 sudo docker run -d --name=webserver bering/webserver:latest
+
+
+cd ~/bering/bering-IOT/temp-sensor
+sudo docker build -t bering/temp-sensor:latest .
+sudo docker run -d --name=temp-sensor --privileged bering/temp-sensor:latest
+
 
