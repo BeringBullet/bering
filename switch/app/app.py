@@ -9,7 +9,7 @@ MAGNET_GPIO = 17
 
 
 def my_callback(value):
-    print GPIO.input(value)
+    print(GPIO.input(value))
 
 GPIO.setup(MAGNET_GPIO, GPIO.IN) # GPIO Assign mode
 GPIO.add_event_detect(MAGNET_GPIO, GPIO.BOTH, callback=my_callback)

@@ -5,6 +5,10 @@ homeassistant/sensor/sensor-148c442/config
 {"name": "GARAGE TEMP","state_topic": "homie/gs1/status/temperature"}
 
 
+homeassistant/sensor/boolean-148c442/config
+{"name": "GARAGE Door 1","state_topic": "homie/gd1/boolean/boolean"}
+
+
 sonoff setup
 
 Steps:
