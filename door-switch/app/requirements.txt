@@ -1,0 +1,3 @@
+paho.mqtt
+Adafruit_DHT
+Homie4
