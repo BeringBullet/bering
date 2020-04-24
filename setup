@@ -1,2 +1,55 @@
   git config --global user.name "Mike Walters"
   git config --global user.email "mike@beringbullet.com"
+
+homeassistant/sensor/sensor-148c442/config
+{"name": "GARAGE TEMP","state_topic": "homie/gs1/status/temperature"}
+
+
+sonoff setup
+
+Steps:
+Open the Tasmota Console on the flashed Sonoff Mini.
+
+Enter to set the relay to the on state:
+
+Copy to clipboard
+PowerOnState 1
+Enter to retain the power state:
+
+Copy to clipboard
+PowerRetain 1
+Enter to turn the conventional wall switch into a toggle switch (when the switch it toggled the following mqtt command is published: cmnd/my-custom-topic/SWITCH 2):
+
+Copy to clipboard
+Rule1 on switch1#state do publish cmnd/my-custom-topic/SWITCH %value% endon
+and to activate the rule
+
+Copy to clipboard
+Rule1 1
+Add the the config to your configuration.yaml
+
+Copy to clipboard
+switch:
+  - platform: mqtt
+    name: "Kitchen light"
+    state_topic: "stat/my-custom-topic/SWITCH"
+    command_topic: "cmnd/my-custom-topic/SWITCH"
+    availability_topic: "tele/my-custom-topic/LWT"
+    qos: 1
+Test the topic & payload in Home Assistant by tapping Developer Tools, then the MQTT tab and entering
+cmnd/my-custom-topic/SWITCH into the Topic to subscribe to field.
+Toggle the light switch and you should see the MQTT output.
+
+The final step is to create the Automation.
+
+Name the Action.
+a. Enter a description
+Set Trigger:
+a. Trigger type: MQTT
+b. Set topic: cmnd/my-custom-topic/SWITCH
+No condition is required
+Set Actions:
+a. Action type: Device
+b. Device: Kitchen Light (or your light)
+c. Action: Toggle Kitchen light (toggle you light)
+Save & Test

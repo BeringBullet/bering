@@ -1,8 +1,5 @@
-#!/usr/bin/env python3
-
 import re
 from typing import NamedTuple
-
 import paho.mqtt.client as mqtt
 from influxdb import InfluxDBClient
 
@@ -14,8 +11,8 @@ INFLUXDB_DATABASE = 'home_db'
 MQTT_ADDRESS = '192.168.86.30'
 MQTT_USER = 'mqttuser'
 MQTT_PASSWORD = 'mqttpassword'
-MQTT_TOPIC = 'home/+/+'
-MQTT_REGEX = 'home/([^/]+)/([^/]+)'
+MQTT_TOPIC = 'homie/+/+/+'
+MQTT_REGEX = 'homie/([^/]+)/([^/]+)/([^/]+)'
 MQTT_CLIENT_ID = 'MQTTInfluxDBBridge'
 
 influxdb_client = InfluxDBClient(
@@ -27,26 +24,22 @@ class SensorData(NamedTuple):
     measurement: str
     value: float
 
-
-def on_connect(client, userdata, flags, rc):
-    """ The callback for when the client receives a CONNACK response from the server."""
-    print('Connected with result code ' + str(rc))
-    client.subscribe(MQTT_TOPIC)
-
-
-def on_message(client, userdata, msg):
-    """The callback for when a PUBLISH message is received from the server."""
-    print(msg.topic + ' ' + str(msg.payload))
+def on_message(client, obj, msg):
+    print(msg.topic + " " + str(msg.qos) + " " + str(msg.payload))
     sensor_data = _parse_mqtt_message(msg.topic, msg.payload.decode('utf-8'))
     if sensor_data is not None:
         _send_sensor_data_to_influxdb(sensor_data)
+
+
+def on_log(client, obj, level, string):
+    print(string)
 
 
 def _parse_mqtt_message(topic, payload):
     match = re.match(MQTT_REGEX, topic)
     if match:
         location = match.group(1)
-        measurement = match.group(2)
+        measurement = match.group(3)
         if measurement == 'status':
             return None
         return SensorData(location, measurement, float(payload))
@@ -78,13 +71,11 @@ def _init_influxdb_database():
 
 def main():
     _init_influxdb_database()
-
-    mqtt_client = mqtt.Client(MQTT_CLIENT_ID)
-    mqtt_client.on_connect = on_connect
-    mqtt_client.on_message = on_message
-
-    mqtt_client.connect(MQTT_ADDRESS, 1883)
-    mqtt_client.loop_forever()
+    mqttc = mqtt.Client()
+    mqttc.on_message = on_message
+    mqttc.connect(MQTT_ADDRESS, 1883)
+    mqttc.subscribe(MQTT_TOPIC, 0)
+    mqttc.loop_forever()
 
 
 if __name__ == '__main__':
