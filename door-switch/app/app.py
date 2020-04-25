@@ -12,7 +12,7 @@ mqtt_settings = {
 deviceID = "gd1"
 MQTT_PUBLISH_DELAY = 60
 MAGNET_GPIO = 17
-lastvalue =
+lastvalue = -1
 
 def my_callback(value):
     value = GPIO.input(value)

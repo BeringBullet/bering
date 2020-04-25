@@ -9,7 +9,7 @@ mqtt_settings = {
 }
 
 deviceID = "gs1"
-MQTT_PUBLISH_DELAY = 60
+MQTT_PUBLISH_DELAY = 1800
 DHT_SENSOR = Adafruit_DHT.DHT22
 DHT_PIN = 4
 

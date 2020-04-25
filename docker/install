@@ -31,21 +31,21 @@ sudo docker run -d --name=webserver --restart unless-stopped bering/webserver:la
 
 sudo docker stop mqtt-influxdb
 sudo docker rmi bering/mqtt-influxdb:latest
-sudo docker rm mqtt-influxdb
+sudo docker rm bering/mqtt-influxdb
 cd ~/bering/bering-IOT/mqtt-influxdb
 sudo docker build -t bering/mqtt-influxdb:latest .
 sudo docker run -d --name=mqtt-influxdb --privileged --restart unless-stopped bering/mqtt-influxdb:latest
 
 sudo docker stop temp-sensor
 sudo docker rmi bering/temp-sensor:latest
-sudo docker rm temp-sensor
+sudo docker rm bering/temp-sensor
 cd ~/bering/bering-IOT/temp-sensor
 sudo docker build -t bering/temp-sensor:latest .
 sudo docker run -d --name=temp-sensor --privileged --restart unless-stopped bering/temp-sensor:latest
 
 sudo docker stop door-switch
 sudo docker rmi bering/door-switch:latest
-sudo docker rm door-switch
+sudo docker rm bering/door-switch
 cd ~/bering/bering-IOT/door-switch
 sudo docker build -t bering/door-switch:latest .
 sudo docker run -d --name=door-switch --privileged --restart unless-stopped bering/door-switch:latest
