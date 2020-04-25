@@ -1,5 +1,6 @@
 #https://tutorials-raspberrypi.com/raspberry-pi-door-window-sensor-with-reed-relais/
 import RPi.GPIO as GPIO
+import paho.mqtt.client as mqtt
 import time
 from homie.device_boolean import Device_Boolean
 
@@ -31,9 +32,9 @@ switch = Device_Boolean(
 def send_State(value):
     print("mqtt: " + str(value))
     if value == 0:
-        switch.update_boolean(True)
-    else:
         switch.update_boolean(False)
+    else:
+        switch.update_boolean(True)
     lastvalue = value
     print("new: " + str(value) + " old: " + str(lastvalue))
    
