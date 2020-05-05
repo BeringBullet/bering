@@ -1,6 +1,12 @@
 git config --global user.name "Mike Walters"
 git config --global user.email "mike@beringbullet.com"
 
+ssh-keygen -t rsa -b 4096 -C "mike@beringbullet.com"
+
+eval "$(ssh-agent -s)"
+ssh-add -k ~/.ssh/id_rsa
+cat ~/.ssh/id_rsa.pub
+
 homeassistant/sensor/sensor-148c442/config
 {"name": "GARAGE TEMP","state_topic": "homie/gs1/status/temperature"}
 
