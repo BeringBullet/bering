@@ -1,5 +1,5 @@
-  git config --global user.name "Mike Walters"
-  git config --global user.email "mike@beringbullet.com"
+git config --global user.name "Mike Walters"
+git config --global user.email "mike@beringbullet.com"
 
 homeassistant/sensor/sensor-148c442/config
 {"name": "GARAGE TEMP","state_topic": "homie/gs1/status/temperature"}
