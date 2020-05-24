@@ -1,0 +1,22 @@
+
+mkdir ~/media
+mkdir ~/syncthing
+mkdir ~/syncthing/config
+mkdir ~/syncthing/data1
+mkdir ~/syncthing/data2
+
+sudo docker run -d \
+  --name=syncthing \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=America/Chicago \
+  -e UMASK_SET=022 \
+  -p 8384:8384 \
+  -p 22000:22000 \
+  -p 21027:21027/udp \
+  -v ~/syncthing/config:/config \
+  -v ~/syncthing/data1:/data1 \
+  -v ~/syncthing/data2:/data2 \
+  -v ~/media:/media \
+  --restart unless-stopped \
+  linuxserver/syncthing
