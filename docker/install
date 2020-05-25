@@ -49,3 +49,29 @@ sudo docker rm door-switch
 cd ~/bering/bering-IOT/door-switch
 sudo docker build -t bering/door-switch:latest .
 sudo docker run -d --name=door-switch --privileged --restart unless-stopped bering/door-switch:latest
+
+
+
+sudo docker run -d \
+ --name=plex \
+ --net=host \
+ -v /media/usb-drive/Plex/config:/config \
+ -v /media/usb-drive/Plex/tvshows:/data/tvshows \
+ -v /media/usb-drive/Plex/movies:/data/movies \
+ -v /media/usb-drive/Plex/transcode:/transcode \
+ lsioarmhf/plex
+
+
+sudo apt-get update
+sudo apt-get install samba
+sudo smbpasswd -a pi
+sudo cp /etc/samba/smb.conf ~
+
+sudo nano /etc/samba/smb.conf
+[home-main]
+path = /media/usb-drive/
+valid users = pi
+read only = no
+
+sudo service smbd restart
+
