@@ -75,3 +75,5 @@ read only = no
 
 sudo service smbd restart
 
+sudo mount.cifs //192.168.86.59/home-pie-2 /home/pi/home-pie-2/ -o user=pi,pass=bering
+
