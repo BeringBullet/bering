@@ -1,0 +1,3 @@
+cd /home/pi/media/usb-drive/Plex/
+cd /home/pi/home-pie-2/usb-drive/'TV Shows'
+sudo cp -v -r /home/pi/home-pie-2/usb-drive/'TV Shows' /home/pi/media/usb-drive/Plex/tvshows/

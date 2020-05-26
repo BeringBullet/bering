@@ -1,0 +1,14 @@
+To enable everyone rw access, the key is umask=0 option to mount command.
+
+sudo mount -o umask=0,uid=nobody,gid=nobody /dev/something /mnt/somewhere
+umask=0 is enough, uid and gid just for sake of clarity, so you don't see more 'root' owners than necessarily.
+
+@Tom's answer (writing /etc/fstab entry) will allow you to skip sudo and if you write umask=0 as additional option there, you'll get best of both worlds:
+
+Having this in /etc/fstab:
+
+/dev/something /mnt/somewhere auto users,noatime,umask=0 0 0
+allows you to just run
+
+mount /dev/something
+and everyone has access to all files.

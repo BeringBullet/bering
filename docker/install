@@ -52,12 +52,5 @@ sudo docker run -d --name=door-switch --privileged --restart unless-stopped beri
 
 
 
-sudo docker run -d \
- --name=plex \
- --net=host \
- -v /media/usb-drive/Plex/config:/config \
- -v /media/usb-drive/Plex/tvshows:/data/tvshows \
- -v /media/usb-drive/Plex/movies:/data/movies \
- -v /media/usb-drive/Plex/transcode:/transcode \
- lsioarmhf/plex
+sudo docker run -d --name=plex --net=host -e PUID=1000 -e PGID=1000 -e VERSION=docker -e UMASK_SET=022 -e PLEX_CLAIM=claim-haJSyXxThDNMQSCChKhb -v ~/media/usb-drive/Plex/config:/config -v ~/media/usb-drive/Plex/tvshows:/data/tvshows -v ~/media/usb-drive/Plex/movies:/data/movies -v ~/media/usb-drive/Plex/transcode:/transcode lsioarmhf/plex
 
