@@ -1,0 +1,17 @@
+sudo fdisk -l
+
+mkdir ~/media/usb-drive 
+chown -R "pi" ~/media/usb-drive
+
+ls -l /dev/disk/by-uuid/*
+
+
+
+sudo mount /dev/disk/by-uuid/2686f8c7-9b56-45bb-a48f-b86b1e189322 ~/media/usb-drive/
+
+mount | grep /sda2
+
+sudo nano /etc/fstab
+/dev/disk/by-uuid/2686f8c7-9b56-45bb-a48f-b86b1e189322       ~/media/usb-drive           ext4    defaults        0       0 
+
+
