@@ -1,0 +1,81 @@
+This method works by creating a DHCP server on the Pi's ethernet connection and internally it 'shares' the internet access between eth0 and wlan0. A device connected to the Pi's ethernet will get an IP address from the Pi, not the WiFi, but will still have internet access.
+
+I used a jessie light image but it should work with any... The only package that is needed is dnsmasq however from a clean install it is a good idea to make sure everything is up-to-date:
+Code: Select all
+
+sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install rpi-update dnsmasq -y
+sudo rpi-update
+Reboot before continuing.
+
+Connect to WiFi
+First, setup the wifi connection that will be bridged to the ethernet.
+Code: Select all
+
+sudo nano  /etc/wpa_supplicant/wpa_supplicant.conf
+Add:
+Code: Select all
+
+network={
+        ssid="mynetwork"
+        psk="secret"
+        key_mgmt=WPA-PSK
+}
+Ethernet Static IP
+Next, setup a static ip for the dhcp server.
+Code: Select all
+
+sudo nano /etc/network/interfaces
+Comment out the existing eth0 line and add:
+Code: Select all
+
+#iface eth0 inet manual
+allow-hotplug eth0  
+iface eth0 inet static  
+    address 172.24.1.1
+    netmask 255.255.255.0
+    network 172.24.1.0
+    broadcast 172.24.1.255
+dnsmasq setup
+Save the old dnsmasq conf file and create a new one.
+Code: Select all
+
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig  
+sudo nano /etc/dnsmasq.conf
+Add:
+Code: Select all
+
+interface=eth0      # Use interface eth0  
+listen-address=172.24.1.1 # Explicitly specify the address to listen on  
+bind-interfaces      # Bind to the interface to make sure we aren't sending things elsewhere  
+server=8.8.8.8       # Forward DNS requests to Google DNS  
+domain-needed        # Don't forward short names  
+bogus-priv           # Never forward addresses in the non-routed address spaces.  
+dhcp-range=172.24.1.50,172.24.1.150,12h # Assign IP addresses between 172.24.1.50 and 172.24.1.150 with a 12 hour lease time  
+Enable IPv4 forwarding.
+Code: Select all
+
+sudo nano /etc/sysctl.conf
+Uncomment the following line:
+Code: Select all
+
+net.ipv4.ip_forward=1
+IP Tables
+Add this:
+Code: Select all
+
+sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE 
+Configure it to load on reboot by first saving it to a file:
+Code: Select all
+
+sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+Then create a 'hook' file with a line to restore the ip tables :
+Code: Select all
+
+sudo nano /lib/dhcpcd/dhcpcd-hooks/70-ipv4-nat
+Add:
+Code: Select all
+
+iptables-restore < /etc/iptables.ipv4.nat
+After a reboot you should automatically connect to your wifi and, assuming it has internet access, anything plugged into your Pi's ethernet port will have internet access as well.
+
+Good luck...
