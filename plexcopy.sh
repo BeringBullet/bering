@@ -1,4 +1,4 @@
 cd /home/pi/media/usb-drive/Plex/tvshows/
-sudo cp -vru --exclude=".*"  /home/pi/home-pie-2/usb-drive/'TV Shows'/* .
+sudo mv -vfu *.mkv  /home/pi/home-pie-2/usb-drive/'TV Shows'/* .
 cd /home/pi/media/usb-drive/Plex/movies/
-sudo cp -vru --exclude=".*"  /home/pi/home-pie-2/usb-drive/Movies/* .
+sudo cp mv -vfu *.mkv  /home/pi/home-pie-2/usb-drive/Movies/* .
