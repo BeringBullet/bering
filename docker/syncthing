@@ -2,8 +2,6 @@
 mkdir ~/media
 mkdir ~/syncthing
 mkdir ~/syncthing/config
-mkdir ~/syncthing/data1
-mkdir ~/syncthing/data2
 
 sudo docker run -d \
   --name=syncthing \
@@ -15,6 +13,6 @@ sudo docker run -d \
   -p 22000:22000 \
   -p 21027:21027/udp \
   -v ~/syncthing/config:/config \
-  -v ~/bering:/media \
+  -v /media/pi/usb:/media \
   --restart unless-stopped \
   linuxserver/syncthing
