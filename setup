@@ -7,6 +7,12 @@ eval "$(ssh-agent -s)"
 ssh-add -k ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub
 
+
+mkdir ~/bering
+git clone git@github.com:BeringBullet/bering-IOT.git
+
+
+
 homeassistant/sensor/sensor-148c442/config
 {"name": "GARAGE TEMP","state_topic": "homie/gs1/status/temperature"}
 

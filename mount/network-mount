@@ -7,7 +7,7 @@ sudo cp /etc/samba/smb.conf ~
 
 sudo nano /etc/samba/smb.conf
 [home-main]
-path = /media/usb-drive/
+path = /media/pi/
 valid users = pi
 read only = no
 
