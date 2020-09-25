@@ -1,7 +1,9 @@
 sudo fdisk -l
 
 mkdir ~/media/usb-drive 
-chown -R "pi" ~/media/usb-drive
+chown -R "pi" /media/usb1
+chown -R "pi" /media/usb2
+chown -R "pi" /media/usb3
 
 ls -l /dev/disk/by-uuid/*
 
@@ -11,7 +13,9 @@ sudo mount /dev/disk/by-uuid/2686f8c7-9b56-45bb-a48f-b86b1e189322 ~/media/usb-dr
 
 mount | grep /sda2
 
-sudo nano /etc/fstab
-/dev/disk/by-uuid/2686f8c7-9b56-45bb-a48f-b86b1e189322       ~/media/usb-drive           ext4    defaults        0       0 
+sudo nano /etc/moun
+/dev/disk/by-uuid/33d00467-8537-4b1e-bf35-98b24c339ff5       ~/media/usb-drive           ext4    defaults        0       0 
+/dev/disk/by-uuid/41da1517-d77b-4fc6-aa81-5ef2d5715797       ~/media/usb-drive           ext4    defaults        0       0 
+/dev/disk/by-uuid/eb3c2181-1e53-40fa-a944-2c194b3c8b99       ~/media/usb-drive           ext4    defaults        0       0 
 
 

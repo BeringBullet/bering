@@ -7,6 +7,6 @@ sudo docker run -d \
 -e UMASK_SET=022 \
 -e PLEX_CLAIM=claim-haJSyXxThDNMQSCChKhb \
 -v ~/Plex/config:/config \
--v /media/beringbullet:/media/beringbullet \
+-v ~/Media:/media \
 -v ~/Plex/transcode:/transcode \
 linuxserver/plex:latest

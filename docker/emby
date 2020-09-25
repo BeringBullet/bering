@@ -4,8 +4,7 @@ sudo docker create \
   -e PGID=1000 \
   -e TZ=America/Chicago \
   -p 8096:8096 \
-  -v /media/library:/config \
-  -v /media/beringbullet:/data/tvshows \
-  -v /media/beringbullet:/data/movies \
+  -v ~/Media/library:/config \
+  -v ~/Media:/data/media \
   --restart unless-stopped \
   linuxserver/emby
