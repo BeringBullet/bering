@@ -12,7 +12,7 @@ sudo usermod -aG docker administrator
 sudo systemctl enable docker
 
 sudo docker volume create portainer_data
-sudo docker run -it -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+sudo docker run -it -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer:latest
 sudo docker pull influxdb
 sudo docker run -it -d -p 8086:8086 --name=influxdb --restart=unless-stopped influxdb 
 sudo docker run -it -d -p 1883:1883 --name=MQTT-Brocker --restart unless-stopped -p 9001:9001 -v ~/bering/bering-IOT/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf eclipse-mosquitto

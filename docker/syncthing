@@ -12,6 +12,6 @@ sudo docker run -d \
   -p 22000:22000 \
   -p 21027:21027/udp \
   -v ~/syncthing/config:/config \
-  -v /media/beringbullet:/media \
+  -v ~/Media:/media \
   --restart unless-stopped \
-  linuxserver/syncthing
+  linuxserver/syncthing:latest
