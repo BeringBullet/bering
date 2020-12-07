@@ -1,1 +1,10 @@
-∏
+sudo docker run -d \
+  --name=emby \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=America/Chicago \
+  -p 8096:8096 \
+  -v ~/Media/library:/config \
+  -v ~/Media:/data/media \
+  --restart unless-stopped \
+  linuxserver/emby

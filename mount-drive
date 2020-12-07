@@ -1,21 +1,27 @@
 sudo fdisk -l
 
-mkdir ~/media/usb-drive 
+mkfs.ext4 2BE20751-0556-4562-BDC3-A52AF9874A52
+
+sudo fdisk /dev/sdd
+sudo mkfs.ext4 /dev/sdd1
+
+mkdir ~/Media/usb4
 chown -R "pi" /media/usb1
 chown -R "pi" /media/usb2
 chown -R "pi" /media/usb3
-
+sudochown -R "pi" ~/Media/usb4
 ls -l /dev/disk/by-uuid/*
+sudo chmod -R 777 ~/Media/usb4
 
 
 
-sudo mount /dev/disk/by-uuid/2686f8c7-9b56-45bb-a48f-b86b1e189322 ~/media/usb-drive/
-
+sudo mount /dev/disk/by-uuid/2BE20751-0556-4562-BDC3-A52AF9874A52 ~/Media/usb4/
 mount | grep /sda2
 
-sudo nano /etc/moun
-/dev/disk/by-uuid/33d00467-8537-4b1e-bf35-98b24c339ff5       ~/media/usb-drive           ext4    defaults        0       0 
-/dev/disk/by-uuid/41da1517-d77b-4fc6-aa81-5ef2d5715797       ~/media/usb-drive           ext4    defaults        0       0 
-/dev/disk/by-uuid/eb3c2181-1e53-40fa-a944-2c194b3c8b99       ~/media/usb-drive           ext4    defaults        0       0 
+sudo nano /etc/fstab
 
+/dev/disk/by-uuid/33d00467-8537-4b1e-bf35-98b24c339ff5       /home/pi/Media/usb1            ext4    defaults        0       0 
+/dev/disk/by-uuid/41da1517-d77b-4fc6-aa81-5ef2d5715797       /home/pi/Media/usb2            ext4    defaults        0       0 
+/dev/disk/by-uuid/eb3c2181-1e53-40fa-a944-2c194b3c8b99       /home/pi/Media/usb3            ext4    defaults        0       0 
+/dev/disk/by-uuid/2BE20751-0556-4562-BDC3-A52AF9874A52       /home/pi/Media/usb4           ext4    defaults        0       0 
 
