@@ -1,2 +1,2 @@
-docker pull influxdb
-docker run -p 8086:8086 --name=influxdb --restart=unless-stopped influxdb 
+sudo docker pull influxdb
+sudo docker run -it -d -p 8086:8086 --name=influxdb --restart=unless-stopped influxdb 

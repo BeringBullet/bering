@@ -16,9 +16,11 @@ sudo docker run -it -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=alwa
 sudo docker pull influxdb
 sudo docker run -it -d -p 8086:8086 --name=influxdb --restart=unless-stopped influxdb 
 sudo docker run -it -d -p 1883:1883 --name=MQTT-Brocker --restart unless-stopped -p 9001:9001 -v ~/bering/bering-IOT/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf eclipse-mosquitto
-sudo docker run --init -d --name="home-assistant" --restart unless-stopped -p 8123:8123 -e "TZ=America/Chicago" -v ~/bering/home-assistant/config:/config homeassistant/raspberrypi3-homeassistant:stable
-sudo docker run -d --name=chronograf --restart unless-stopped -p 8888:8888 chronograf --influxdb-url=http://192.168.86.30:8086
+sudo docker run -d --name=chronograf --restart unless-stopped -p 8888:8888 chronograf --influxdb-url=http://192.168.86.39:8086
 sudo docker run --net=container:influxdb -d --name="tarlegraf" --restart unless-stopped telegraf
+
+
+sudo docker run --init -d --name="home-assistant" --restart unless-stopped -p 8123:8123 -e "TZ=America/Chicago" -v ~/bering/home-assistant/config:/config homeassistant/raspberrypi3-homeassistant:stable
 
 cd ~/bering/bering-IOT/mqtt-influxdb
 sudo docker build -t bering/mqqt-influxdb:latest .
