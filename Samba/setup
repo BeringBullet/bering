@@ -1,0 +1,23 @@
+sudo apt-get update
+sudo apt-get install samba
+sudo apt-get install samba-common-bin
+
+
+sudo nano /etc/samba/smb.conf
+
+
+Add the following section
+
+[PiShare]
+ comment=Raspberry Pi Share
+ path=/home/pi/public
+ browseable=Yes
+ writeable=Yes
+ only guest=no
+ create mask=0777
+ directory mask=0777
+ public=no
+
+
+
+ testparm

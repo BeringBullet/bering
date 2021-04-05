@@ -1,21 +1,40 @@
 sudo fdisk -l
 
-mkfs.ext4 2BE20751-0556-4562-BDC3-A52AF9874A52
+mkfs.ext4 8EC6DD9A-F53F-42D1-AFCF-BDEB1132FE0E
 
-sudo fdisk /dev/sdd
-sudo mkfs.ext4 /dev/sdd1
+sudo fdisk /dev/sda2
+sudo fdisk 361f0044-bc3e-4858-b688-99ffe9dfc1d8
+sudo mkfs.ext4 /dev/sda2
 
-mkdir ~/Media/usb4
-chown -R "pi" /media/usb1
-chown -R "pi" /media/usb2
-chown -R "pi" /media/usb3
-sudochown -R "pi" ~/Media/usb4
-ls -l /dev/disk/by-uuid/*
+mkdir /home/pi/Media
+mkdir /home/pi/Media/usb1
+mkdir /home/pi/Media/usb2
+mkdir /home/pi/Media/usb3
+mkdir /home/pi/Media/usb4
+mkdir /home/pi/Media/usb5
+mkdir /home/pi/Media/usb6
+
+chown -R "pi" /home/pi/Media/usb1
+chown -R "pi" /home/pi/Media/usb2
+chown -R "pi" /home/pi/Media/usb3
+chown -R "pi" /home/pi/Media/usb4
+chown -R "pi" /home/pi/Media/usb5
+chown -R "pi" /home/pi/Media/usb6
+
+
+sudo chmod -R 777 ~/Media/usb1
+sudo chmod -R 777 ~/Media/usb2
+sudo chmod -R 777 ~/Media/usb3
 sudo chmod -R 777 ~/Media/usb4
+sudo chmod -R 777 ~/Media/usb5
+sudo chmod -R 777 ~/Media/usb6
+
+ls -l /dev/disk/by-uuid/*
+sudo chmod -R 777 ~/Media/usb6
 
 
 
-sudo mount /dev/disk/by-uuid/2BE20751-0556-4562-BDC3-A52AF9874A52 ~/Media/usb4/
+sudo mount /dev/disk/by-uuid/361f0044-bc3e-4858-b688-99ffe9dfc1d8 ~/Media/usb6/
 mount | grep /sda2
 
 sudo nano /etc/fstab
@@ -23,5 +42,7 @@ sudo nano /etc/fstab
 /dev/disk/by-uuid/33d00467-8537-4b1e-bf35-98b24c339ff5       /home/pi/Media/usb1            ext4    defaults        0       0 
 /dev/disk/by-uuid/41da1517-d77b-4fc6-aa81-5ef2d5715797       /home/pi/Media/usb2            ext4    defaults        0       0 
 /dev/disk/by-uuid/eb3c2181-1e53-40fa-a944-2c194b3c8b99       /home/pi/Media/usb3            ext4    defaults        0       0 
-/dev/disk/by-uuid/2BE20751-0556-4562-BDC3-A52AF9874A52       /home/pi/Media/usb4           ext4    defaults        0       0 
+/dev/disk/by-uuid/6c3e7839-a571-4e4a-a73a-085b4555608a       /home/pi/Media/usb4            ext4    defaults        0       0 
+/dev/disk/by-uuid/fcf7284c-d3f5-440f-acc1-a359172bedd3       /home/pi/Media/usb5            ext4    defaults        0       0 
+/dev/disk/by-uuid/361f0044-bc3e-4858-b688-99ffe9dfc1d8       /home/pi/Media/usb6            ext4    defaults        0       0 
 

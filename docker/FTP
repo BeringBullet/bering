@@ -1,0 +1,11 @@
+docker pull tcoupin/rpi-proftpd
+
+mkdir FTP
+mkdir FTP/users
+rm ~/FTP/users
+echo "mike bering /Media" >> ~/FTP/users
+
+sudo docker run --name proftpd -d -p 21:21 -v ~/FTP:/users -v ~/Media:/Media tcoupin/rpi-proftpd
+
+passwd="bering"
+echo $passwd | ftpasswd --passwd --name mike --home Media --shell /usr/sbin/nologin --uid 1000 --stdin
