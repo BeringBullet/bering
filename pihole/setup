@@ -1,0 +1,15 @@
+sudo docker run -d \
+    --name pihole \
+    -p 53:53/tcp -p 53:53/udp \
+    -p 80:80 \
+    -p 443:443 \
+    -e TZ="America/Chicago" \
+    -v ~/pyhole/etc-pihole/:/etc/pihole/ \
+    -v ~/pyhole/etc-dnsmasq.d/:/etc/dnsmasq.d/ \
+    --dns=8.8.8.8 --dns=8.8.4.4 \
+    --restart=unless-stopped \
+    --hostname pi.hole \
+    -e VIRTUAL_HOST="pi.hole" \
+    -e PROXY_LOCATION="pi.hole" \
+    -e ServerIP="192.168.86.39" \
+    pihole/pihole:latest
