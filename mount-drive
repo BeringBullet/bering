@@ -13,6 +13,7 @@ mkdir /home/pi/Media/usb3
 mkdir /home/pi/Media/usb4
 mkdir /home/pi/Media/usb5
 mkdir /home/pi/Media/usb6
+mkdir /home/pi/Media/usb7
 
 chown -R "pi" /home/pi/Media/usb1
 chown -R "pi" /home/pi/Media/usb2
@@ -20,7 +21,7 @@ chown -R "pi" /home/pi/Media/usb3
 chown -R "pi" /home/pi/Media/usb4
 chown -R "pi" /home/pi/Media/usb5
 chown -R "pi" /home/pi/Media/usb6
-
+chown -R "pi" /home/pi/Media/usb7
 
 sudo chmod -R 777 ~/Media/usb1
 sudo chmod -R 777 ~/Media/usb2
@@ -28,13 +29,14 @@ sudo chmod -R 777 ~/Media/usb3
 sudo chmod -R 777 ~/Media/usb4
 sudo chmod -R 777 ~/Media/usb5
 sudo chmod -R 777 ~/Media/usb6
+sudo chmod -R 777 ~/Media/usb7
 
 ls -l /dev/disk/by-uuid/*
-sudo chmod -R 777 ~/Media/usb6
+sudo chmod -R 777 ~/Media/usb7
 
 
 
-sudo mount /dev/disk/by-uuid/361f0044-bc3e-4858-b688-99ffe9dfc1d8 ~/Media/usb6/
+sudo mount /dev/disk/by-uuid/57b38360-c301-4a87-a284-b8c1cb13211a ~/Media/usb7/
 mount | grep /sda2
 
 sudo nano /etc/fstab
@@ -45,4 +47,4 @@ sudo nano /etc/fstab
 /dev/disk/by-uuid/6c3e7839-a571-4e4a-a73a-085b4555608a       /home/pi/Media/usb4            ext4    defaults        0       0 
 /dev/disk/by-uuid/fcf7284c-d3f5-440f-acc1-a359172bedd3       /home/pi/Media/usb5            ext4    defaults        0       0 
 /dev/disk/by-uuid/361f0044-bc3e-4858-b688-99ffe9dfc1d8       /home/pi/Media/usb6            ext4    defaults        0       0 
-
+/dev/disk/by-uuid/57b38360-c301-4a87-a284-b8c1cb13211a       /home/pi/Media/usb7            ext4    defaults        0       0 
