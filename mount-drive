@@ -1,4 +1,5 @@
 sudo fdisk -l
+ls -lha /dev/disk/by-uuid
 
 mkfs.ext4 8EC6DD9A-F53F-42D1-AFCF-BDEB1132FE0E
 
