@@ -7,4 +7,4 @@ sudo docker run -d \
   -v ~/Media/library:/config \
   -v ~/Media/data/media \
   --restart unless-stopped \
-  linuxserver/emby
+  emby/embyserver_arm32v7
