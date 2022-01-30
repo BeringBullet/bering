@@ -51,4 +51,5 @@ dhcp-range=$dhcp_range_start,$dhcp_range_end,$dhcp_time" > /tmp/custom-dnsmasq.c
 
 sudo cp /tmp/custom-dnsmasq.conf /etc/dnsmasq.d/custom-dnsmasq.conf
 sudo systemctl start dnsmasq
-sudo sysctl -w net.ipv4.ip_forward=1
+
+sudo nano /etc/sysctl.cong  #set ip_forward to 1
