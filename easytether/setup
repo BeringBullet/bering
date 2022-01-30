@@ -3,3 +3,6 @@ curl http://www.mobile-stream.com/beta/raspbian/9/easytether_0.8.9_armhf.deb > ~
 sudo apt install http://www.mobile-stream.com/beta/raspbian/9/easytether_0.8.9_armhf.deb
 
 sudo dpkg -i easytether_0.8.9_armhf.deb
+
+to save iptable
+https://askubuntu.com/questions/119393/how-to-save-rules-of-the-iptables
