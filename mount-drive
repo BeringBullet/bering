@@ -35,7 +35,8 @@ sudo chmod -R 777 ~/Media/usb7
 ls -l /dev/disk/by-uuid/*
 sudo chmod -R 777 ~/Media/usb7
 
-
+6C17834C-1DFD-4EFE-B0DB-5C6D5CFF2B7E
+sudo mount /dev/disk/by-uuid/68CC1BF5CC1BBBEE ~/media/
 
 sudo mount /dev/disk/by-uuid/57b38360-c301-4a87-a284-b8c1cb13211a ~/Media/usb7/
 mount | grep /sda2

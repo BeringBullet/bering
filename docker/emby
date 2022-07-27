@@ -4,7 +4,31 @@ sudo docker run -d \
   -e PGID=1000 \
   -e TZ=America/Chicago \
   -p 8096:8096 \
-  -v ~/Media/library:/config \
-  -v ~/Media/data/media \
+  -v ~/media/library:/config \
+  -v ~/media/movies \
+  -v ~/media/tv \
   --restart unless-stopped \
   emby/embyserver_arm32v7
+
+
+  version: "2.3"
+services:
+  emby:
+    image: emby/embyserver_arm32v7
+    container_name: embyserver
+    network_mode: host # Enable DLNA and Wake-on-Lan
+    environment:
+      - UID=1000 # The UID to run emby as (default: 2)
+      - GID=100 # The GID to run emby as (default 2)
+      - GIDLIST=100 # A comma-separated list of additional GIDs to run emby as (default: 2)
+    volumes:
+      - /home/ubuntu/media/library:/config
+      - /home/ubuntu/media/movies:/movies
+      - /home/ubuntu/media/tv:/tv
+    ports:
+      - 8096:8096 # HTTP port
+      - 8920:8920 # HTTPS port
+    devices:
+      - /dev/dri:/dev/dri # VAAPI/NVDEC/NVENC render nodes
+      - /dev/vchiq:/dev/vchiq # MMAL/OMX on Raspberry Pi
+    restart: unless-stopped
