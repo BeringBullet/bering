@@ -1,0 +1,26 @@
+version: "3"
+services:
+  pihole:
+    image: pihole/pihole:latest
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    volumes:
+      - "/opt/docker/pihole/etc/pihole:/etc/pihole"
+      - "/opt/docker/pihole/etc/dnsmasq.d:/etc/dnsmasq.d"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "801:80/tcp"
+      - "4431:443/tcp"
+    environment:
+      - TZ='America/Chicago'
+      - WEBPASSWORD=bering
+      - FTL_CMD=debug
+      - DNSMASQ_LISTENING=all
+      - PIHOLEDNS=192.168.88.1
+    dns:
+      - 192.168.88.1
