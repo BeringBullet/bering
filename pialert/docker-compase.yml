@@ -18,5 +18,5 @@ services:
       - HOST_USER_ID=1000
       - HOST_USER_GID=1000
 networks:
-  pialert:
+  host:
     external: true
