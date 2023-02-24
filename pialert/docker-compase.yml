@@ -19,4 +19,5 @@ services:
       - HOST_USER_GID=1000
 networks:
   host:
+    name: host
     external: true
