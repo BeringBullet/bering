@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  pialert:
+    container_name: pialert
+    image: "jokobsk/pi.alert:latest"
+    networks:
+      pialert:
+    restart: always
+    ports:
+      - 20211:20211
+    volumes:
+      - /opt/docker/pialert/config:/home/pi/pialert/config
+      - /opt/docker/pialert/db/pialert.db:/home/pi/pialert/db/pialert.db
+      - /opt/docker/pialert/log:/home/pi/pialert/log
+    environment:
+      - TZ=America/Chicago
+      - PORT=20211
+      - HOST_USER_ID=1000
+      - HOST_USER_GID=1000
+networks:
+  pialert:
+    external: true
