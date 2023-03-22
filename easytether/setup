@@ -6,3 +6,6 @@ sudo dpkg -i easytether_0.8.9_armhf.deb
 
 to save iptable
 https://askubuntu.com/questions/119393/how-to-save-rules-of-the-iptables
+
+
+https://www.reddit.com/r/openwrt/comments/my1o44/easytether_success_on_wrt3200acm_openwrt/
