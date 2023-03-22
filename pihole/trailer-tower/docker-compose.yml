@@ -5,8 +5,8 @@ services:
     deploy:
       mode: global
     volumes:
-      - /appdata/pihole/config:/etc/pihole
-      - /appdata/pihole/dnsmasq.d:/etc/dnsmasq.d
+      - /mnt/disk1/pihole/config:/etc/pihole
+      - /mnt/disk1/pihole/dnsmasq.d:/etc/dnsmasq.d
     ports:
       - "53:53/tcp"
       - "53:53/udp"
