@@ -1,0 +1,23 @@
+version: "3"
+services:
+  pihole:
+    image: pihole/pihole:latest
+    deploy:
+      mode: global
+         restart: unless-stopped
+    volumes:
+      - "/appdata/pihole/config:/etc/pihole"
+      - "/appdata/pihole/dnsmasq.d:/etc/dnsmasq.d"
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "801:80/tcp"
+      - "4431:443/tcp"
+    environment:
+      - TZ='America/Chicago'
+      - WEBPASSWORD=bering
+      - DNSMASQ_LISTENING=all
+      - PIHOLEDNS=192.168.1.1
+    dns:
+      - 192.168.88.1
