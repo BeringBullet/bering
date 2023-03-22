@@ -6,8 +6,8 @@ services:
       mode: global
          restart: unless-stopped
     volumes:
-      - "/appdata/pihole/config:/etc/pihole"
-      - "/appdata/pihole/dnsmasq.d:/etc/dnsmasq.d"
+      - /appdata/pihole/config:/etc/pihole
+      - /appdata/pihole/dnsmasq.d:/etc/dnsmasq.d
     ports:
       - "53:53/tcp"
       - "53:53/udp"
