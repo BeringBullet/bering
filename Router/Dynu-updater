@@ -1,0 +1,31 @@
+/system script
+add name=Dynu
+policy=read,write,test
+:global ddnsuser "beringbullet"
+:global ddnspass "Bering!23"
+:global theinterface "internet"
+:global ddnshost "beringbullet.com"
+:global ipddns [:resolve $ddnshost];
+:global ipfresh [ /ip address get [/ip address find interface=$theinterface ] address ]
+:if ([ :typeof $ipfresh ] = nil ) do={
+:log info ("DynuDDNS: No IP address on $theinterface .")
+} else={
+:for i from=( [:len $ipfresh] - 1) to=0 do={
+:if ( [:pick $ipfresh $i] = "/") do={
+:set ipfresh [:pick $ipfresh 0 $i];
+}
+}
+:if ($ipddns != $ipfresh) do={
+:log info ("DynuDDNS: IP-Dynu = $ipddns")
+:log info ("DynuDDNS: IP-Fresh = $ipfresh")
+:log info "DynuDDNS: Update IP needed, Sending UPDATE...!"
+:global str "/nic/update?hostname=$ddnshost&myip=$ipfresh"
+/tool fetch address=api.dynu.com src-path=$str mode=http user=$ddnsuser password=$ddnspass dst-path=("/Dynu.".$ddnshost)
+:delay 1
+:global str [/file find name="Dynu.$ddnshost"];
+/file remove $str
+:global ipddns $ipfresh
+:log info "DynuDDNS: IP updated to $ipfresh!"
+} else={
+:log info "DynuDDNS: dont need changes";
+} }
